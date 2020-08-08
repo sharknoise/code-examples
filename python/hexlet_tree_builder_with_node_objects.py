@@ -3,7 +3,7 @@
 
 class TreeBuilder:
     def __init__(self, initial_structure=[]):
-        self._structure = initial_structure
+        self.structure = initial_structure
         self._target_for_add = self
 
     @property  # getter
@@ -27,12 +27,12 @@ class TreeBuilder:
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         if self._target_for_add:
-            self._target_for_add.parent_link.append(self._target_for_add)
-        self._target_for_add = self._target_for_add.parent_link
+            self._target_for_add.parent.append(self._target_for_add)
+        self._target_for_add = self._target_for_add.parent
 
     class Node(list):
-        def __init__(self, parent_link, *args):
-            self.parent_link = parent_link
+        def __init__(self, parent, *args):
+            self.parent = parent
             initial_value = list(args)
             self.extend(initial_value)
 
