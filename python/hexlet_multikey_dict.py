@@ -2,11 +2,13 @@
 
 
 class MultiKeyDict(object):
-    """A dictionary with multiple keys for one value."""
+    """A dictionary with an option of multiple keys for one value."""
 
     def __init__(self, **kwargs):
         """
-        Create a dict-like object.
+        Create a list to store all values and a dict to store all keys.
+        The dict structure is {key: int} where the integer references
+        a list index.
 
         Args:
             kwargs: key-value pairs (key1=value1, key2=value2...)
