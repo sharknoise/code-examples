@@ -29,10 +29,10 @@ class MultiKeyDict(object):
             new_value: value to set or add
         """
         if key in self._mkd_keys:
-            mkd_index = self._mkd_keys[key]
+            mkd_index = self._mkd_keys[key]  # noqa: WPS529
             self._mkd_values[mkd_index] = new_value
         else:
-            self._mkd_keys[key] = len(self._mkd_values)
+            self._mkd_keys[key] = len(self._mkd_values)  # noqa: WPS529
             self._mkd_values.append(new_value)
 
     def __getitem__(self, key):
@@ -47,7 +47,7 @@ class MultiKeyDict(object):
         """
         mkd_index = self._mkd_keys[key]
         return self._mkd_values[mkd_index]
-        
+
     def alias(self, **kwargs):
         """
         Add another key (alias) for the same value.
