@@ -2,7 +2,9 @@
 
 
 class TreeBuilder:
-    def __init__(self, initial_structure=[]):
+    def __init__(self, initial_structure=None):
+        if initial_structure is None:
+            initial_structure = []
         self.structure = initial_structure
         self._target_for_add = self
 
