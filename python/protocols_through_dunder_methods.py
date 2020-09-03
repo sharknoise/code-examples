@@ -1,4 +1,4 @@
-class TestClass(object):
+class Foo(object):
     def __bool__(self):
         return False
 
@@ -6,6 +6,6 @@ class TestClass(object):
         return 9001
 
 
-test_instance = TestClass()
-print(bool(test_instance))
-print(len(test_instance))
+bar = Foo()
+print(bool(bar))
+print(len(bar))
