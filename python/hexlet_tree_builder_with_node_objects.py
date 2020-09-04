@@ -1,7 +1,7 @@
 """https://ru.hexlet.io/challenges/python_oop_basics_tree_builder"""
 
 
-class TreeBuilder:
+class TreeBuilder(object):
     def __init__(self, initial_structure=None):
         if initial_structure is None:
             initial_structure = []
@@ -19,11 +19,11 @@ class TreeBuilder:
     def add(self, leaf_value):
         """Add to the current node."""
         self._target_for_add.append(leaf_value)
-            
+
     def append(self, leaf_value):
         """Add to base level."""
         self._structure.append(leaf_value)
-    
+
     def __enter__(self):
         self._target_for_add = TreeBuilder.Node(self._target_for_add)
 
