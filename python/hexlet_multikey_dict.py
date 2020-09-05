@@ -7,6 +7,7 @@ class MultiKeyDict(object):
     def __init__(self, **kwargs):
         """
         Create a list to store all values and a dict to store all keys.
+
         The dict structure is {key: int} where the integer references
         a list index.
 
@@ -55,19 +56,32 @@ class MultiKeyDict(object):
         Args:
             kwargs: key-alias pair (new_key='old_key')
         """
+        """
         new_key = list({**kwargs}.keys())[0]
         old_key = list({**kwargs}.values())[0]
         mkd_index = self._mkd_keys[old_key]
         self._mkd_keys[new_key] = mkd_index
+        """
+        for new_key, old_key in list({**kwargs}.items()):
+            self._mkd_keys[new_key] = self._mkd_keys[old_key]
 
-mkd = MultiKeyDict(x=100, y=[10, 20])
 
-mkd.alias(z='x')  # 'z' теперь означает то же, что и 'x'
-print(mkd['z'])  # 100
+mkd0 = MultiKeyDict(x=100, y=[10, 20])
 
-mkd['z'] += 1  # Можно даже менять значение через присваивание,
-print(mkd['x'])  # 101
+mkd0.alias(z='x')  # 'z' теперь означает то же, что и 'x'
+print(mkd0['z'])  # 100
 
-mkd.alias(z='y')  # Теперь 'z' уже равнозначен 'y'
-mkd['z'] += [30]
-print(mkd['y'])  # [10, 20, 30]
+mkd0['z'] += 1  # Можно даже менять значение через присваивание,
+print(mkd0['x'])  # 101
+
+mkd0.alias(z='y')  # Теперь 'z' уже равнозначен 'y'
+mkd0['z'] += [30]
+print(mkd0['y'])  # [10, 20, 30]
+
+mkd = MultiKeyDict(a=1, b='foo')
+print(mkd['a'])  # 1
+print(mkd['b'])  # 'foo'
+
+mkd.alias(aa='a', bb='b')
+print(mkd['aa'])  # 1
+print(mkd['bb'])  # 'foo'
