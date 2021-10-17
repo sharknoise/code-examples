@@ -1,4 +1,7 @@
-"""A script to play the reverse Tic-Tac-Toe game vs AI."""
+"""A script to play the reverse Tic-Tac-Toe game vs AI.
+
+Having a vertical, horizontal, or diagonal streak of 5 marks = game loss."""
+
 import random
 from typing import Tuple
 
@@ -56,8 +59,8 @@ def is_free(board: np.ndarray, row_index, column_index) -> bool:
 
 def quit_if_finished(board: np.ndarray, mark: str):
     """Quit if the game is finished."""
-    if check_win(board, mark):
-        winner = "AI" if (mark == AI_MARK) else "human"
+    if check_loss(board, mark):
+        winner = "AI" if (mark == HUMAN_MARK) else "human"
         print(f"The {winner} wins!")
         quit()
 
@@ -66,8 +69,8 @@ def quit_if_finished(board: np.ndarray, mark: str):
         quit()
 
 
-def check_win(board: np.ndarray, mark: str) -> bool:
-    """Return boolean value whether the player wins the game."""
+def check_loss(board: np.ndarray, mark: str) -> bool:
+    """Return boolean value whether the player loses the game."""
     return (
         check_rows(board, mark)
         or check_columns(board, mark)
