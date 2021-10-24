@@ -74,7 +74,8 @@ class Rectangle(Square):
             a: side length
             b: side length
         """
-        super().__init__(a)
+        Shape.__init__(a, b)
+        self.a = a
         self.b = b
 
     def get_area(self) -> float:
@@ -98,7 +99,7 @@ class Triangle(Rectangle):
             c: side length
         """
         self.validate_sides(a, b, c)
-        super().__init__(a, b)
+        Shape.__init__(a, b, c)
         self.c = c
 
     @staticmethod
@@ -111,7 +112,9 @@ class Triangle(Rectangle):
         for index, side in enumerate(sides):
             other_sides = sides[:index] + sides[index + 1 :]
             if side >= sum(other_sides):
-                raise ValueError("Each side should be shorter than the sum of others.")
+                raise ValueError(
+                    "Each side should be shorter than the sum of others."
+                )
 
     def get_area(self) -> float:
         """Calculate triangle area."""
@@ -135,6 +138,7 @@ class Trapezoid(Triangle):
             c: side length
             d: side length
         """
+        Shape.__init__(a, b, c, d)
         super().validate_sides(a, b, c, d)
         self.a = a
         self.b = b
@@ -178,7 +182,10 @@ class Rhombus(Square):
             angle: angle between sides (in degrees)
         """
         if angle >= 180:
-            raise ValueError("The rhombus angle must be less than 180 degrees.")
+            raise ValueError(
+                "The rhombus angle must be less than 180 degrees."
+            )
+        Shape.__init__(a, angle)
         super().__init__(a)
         self.angle = angle
 
@@ -242,6 +249,7 @@ class Parallelepiped(Rectangle):
             b: edge length
             c: edge length
         """
+        Shape.__init__(a, b, c)
         super().__init__(a, b)
         self.c = c
 
@@ -259,12 +267,13 @@ class Parallelepiped(Rectangle):
 
 
 class Pyramid(Shape):
-    def __init__(self, a: float, b: float, c: float):
+    def __init__(self, a: float):
         """Create a regular tetrahedron Pyramid.
 
         Args:
             a: edge length
         """
+        super().__init__(a)
         self.a = a
 
     def get_perimeter(self) -> float:
@@ -316,6 +325,7 @@ class Cone(Circle):
             r: base radius
             h: height
         """
+        Shape.__init__(r, h)
         super().__init__(r)
         self.h = h
 
